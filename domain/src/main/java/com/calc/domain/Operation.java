@@ -27,5 +27,16 @@ public enum Operation {
             return x.subtract(y);
         }
     };
-public abstract BigDecimal action (BigDecimal x, BigDecimal y);
+    static public Operation getOperation(Character op){
+        Operation result = null;
+        switch (op){
+            case '+': result = Operation.SUM; break;
+            case '*': result = Operation.MULTIPLY; break;
+            case '/': result = Operation.DIVIDE; break;
+            case '-': result = Operation.SUBSTRUCT; break;
+        }
+        return result;
+    }
+
+    public abstract BigDecimal action (BigDecimal x, BigDecimal y);
 }
