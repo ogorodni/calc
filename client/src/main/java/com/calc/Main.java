@@ -18,12 +18,14 @@ public class Main {
         Exercise ex = new Exercise(operation, param1, param2);
 
         ClientImpl client = new ClientImpl("http://localhost:8080/calc");
-        HttpResponse getResponse = client.get(ex);
-        HttpResponse postResponse = client.post(ex);
 
+        System.out.println("Output for GET method:");
+        HttpResponse getResponse = client.get(ex);
         System.out.println(getResponse.statusCode());
         System.out.println(getResponse.body());
 
+        System.out.println("Output for POST method:");
+        HttpResponse postResponse = client.post(ex);
         System.out.println(postResponse.statusCode());
         System.out.println(postResponse.body());
     }

@@ -8,8 +8,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ClientImpl implements Client {
-    private HttpClient httpClient;
-    private String url;
+    private final HttpClient httpClient;
+    private final String url;
 
     ClientImpl(String url) {
         httpClient = HttpClient.newBuilder().build();
