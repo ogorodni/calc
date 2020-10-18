@@ -1,6 +1,4 @@
 package com.calc;
-import com.calc.domain.Exercise;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,21 +15,21 @@ public class ClientImpl implements Client {
     }
 
     @Override
-    public HttpResponse get(Exercise ex) throws IOException, InterruptedException {
+    public HttpResponse get(String expr) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url + '?' + ex.toHTMPParams()))
+                .uri(URI.create(url + "?expr=" + expr))
                 .GET()
                 .build();
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
     @Override
-    public HttpResponse post(Exercise ex) throws IOException, InterruptedException {
+    public HttpResponse post(String ex) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Accept","application/json")
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(new Gson().toJson(ex)))
+                .POST(HttpRequest.BodyPublishers.ofString(ex))
                 .build();
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }

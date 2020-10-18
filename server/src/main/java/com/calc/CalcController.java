@@ -1,28 +1,28 @@
 package com.calc;
 
-import com.calc.domain.Exercise;
+import com.calc.domain.ExpressionImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @Controller
 public class CalcController {
 
     @GetMapping("/calc")
-    public String calculate(@ModelAttribute Exercise exercise, Model model)
+    public @ResponseBody
+    BigDecimal calculate(@RequestParam String expr)
     {
-        model.addAttribute("result", exercise.calculate());
-        return "calc";
+        ExpressionImpl expression = new ExpressionImpl(expr);
+        return expression.evaluate();
     }
 
     @PostMapping("/calc")
-    public String jsonCalculate(@RequestBody Exercise exercise, Model model)
+    public @ResponseBody
+    BigDecimal jsonCalculate(@RequestBody String expr)
     {
-        model.addAttribute("result", exercise.calculate());
-        return "calc";
+        ExpressionImpl expression = new ExpressionImpl(expr);
+        return expression.evaluate();
     }
 
 }

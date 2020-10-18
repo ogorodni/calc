@@ -1,32 +1,21 @@
 package com.calc;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.http.HttpResponse;
-import java.util.Scanner;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
-import com.calc.domain.Exercise;
-import com.calc.domain.Operation;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter exercise (E.g. 1 + 2):");
-        BigDecimal param1 = scanner.nextBigDecimal();
-        Operation operation = Operation.getOperation(scanner.next().charAt(0));
-        BigDecimal param2 = scanner.nextBigDecimal();
-        Exercise ex = new Exercise(operation, param1, param2);
 
-        ClientImpl client = new ClientImpl("http://localhost:8080/calc");
-
-        System.out.println("Output for GET method:");
-        HttpResponse getResponse = client.get(ex);
-        System.out.println(getResponse.statusCode());
-        System.out.println(getResponse.body());
-
-        System.out.println("Output for POST method:");
-        HttpResponse postResponse = client.post(ex);
-        System.out.println(postResponse.statusCode());
-        System.out.println(postResponse.body());
+        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+        ctx.load("classpath:conf/context.xml");
+        ctx.refresh();
+        CalculatorService calculatorService = ctx.getBean("calculatorService", CalculatorService.class);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter exercise (E.g. 1 + 2):");
+//        String expr = scanner.nextLine();
+        String expr = "1 + 2";
+        System.out.println(expr + " = " + calculatorService.evaluate(expr));
     }
 }
