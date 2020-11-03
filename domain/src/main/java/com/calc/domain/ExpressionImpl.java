@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ExpressionImpl implements Expression {
-    BigDecimal left;
-    BigDecimal right;
-    Operation operation;
+    final BigDecimal left;
+    final BigDecimal right;
+    final Operation operation;
 
     public ExpressionImpl(String str){
         Scanner scanner = new Scanner(str);

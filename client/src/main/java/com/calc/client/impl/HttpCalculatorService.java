@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 
 public class HttpCalculatorService implements CalculatorService {
-    Client client;
+    final Client client;
 
     public HttpCalculatorService(Client client){
         this.client=client;
