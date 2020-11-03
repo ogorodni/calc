@@ -1,4 +1,4 @@
-package com.calc;
+package com.calc.server;
 
 import com.calc.domain.ExpressionImpl;
 import org.springframework.stereotype.Controller;

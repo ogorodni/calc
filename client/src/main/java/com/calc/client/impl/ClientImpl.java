@@ -1,4 +1,4 @@
-package com.calc;
+package com.calc.client.impl;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,7 +9,7 @@ public class ClientImpl implements Client {
     private final HttpClient httpClient;
     private final String url;
 
-    ClientImpl(String url) {
+    public ClientImpl(String url) {
         httpClient = HttpClient.newBuilder().build();
         this.url = url;
     }
