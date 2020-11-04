@@ -10,7 +10,7 @@ public class Main {
         ctx.load("classpath:context.xml");
         ctx.refresh();
         CalculatorService calculatorService = ctx.getBean("calculatorService", CalculatorService.class);
-        String expr = "1 + 2";
+        String expr = "((1+2) + 3*4 - 1)*5";
         System.out.println(expr + " = " + calculatorService.evaluate(expr));
     }
 }
