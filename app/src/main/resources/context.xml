@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
-    <bean id="client" class="com.calc.client.impl.ClientImpl">
+
+    <bean id="calculatorService" class="com.calc.client.service.HttpCalculatorService">
         <constructor-arg value="http://localhost:8080/calc"/>
     </bean>
 
-    <bean id="calculatorService" class="com.calc.client.impl.HttpCalculatorService">
-        <constructor-arg ref="client"/>
-    </bean>
+    <bean id="client" factory-bean="calculatorService" factory-method="createClient"/>
+
 </beans>

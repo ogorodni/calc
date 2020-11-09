@@ -1,6 +1,6 @@
 package com.calc.client;
 
-import com.calc.client.impl.ClientImpl;
+import com.calc.client.impl.HttpClientImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ class ClientImplTest {
     void post(MockServerClient mockServer) throws IOException, InterruptedException {
         mockServer.when(request().withMethod("POST").withPath("/calc").withBody("2 + 3"))
                 .respond(response().withStatusCode(200).withBody("Result = 5"));
-        ClientImpl client = new ClientImpl("http://localhost:8080/calc");
+        HttpClientImpl client = new HttpClientImpl("http://localhost:8080/calc");
         HttpResponse response = client.post("2 + 3");
         Assertions.assertEquals(200, response.statusCode());
         Assertions.assertEquals("Result = 5", response.body());
@@ -33,7 +33,7 @@ class ClientImplTest {
                 .withPath("/calc")
                 )
                 .respond(response().withStatusCode(200).withBody("Result = 5"));
-        ClientImpl client = new ClientImpl("http://localhost:8080/calc");
+        HttpClientImpl client = new HttpClientImpl("http://localhost:8080/calc");
         HttpResponse response = client.get(ex);
         Assertions.assertEquals(200, response.statusCode());
         Assertions.assertEquals("Result = 5", response.body());

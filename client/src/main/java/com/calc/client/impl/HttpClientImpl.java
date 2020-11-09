@@ -1,20 +1,28 @@
 package com.calc.client.impl;
+import com.calc.client.service.Client;
+
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ClientImpl implements Client {
+public class HttpClientImpl implements Client {
     private final HttpClient httpClient;
     private final String url;
 
-    public ClientImpl(String url) {
+    public HttpClientImpl(String url) {
         httpClient = HttpClient.newBuilder().build();
         this.url = url;
     }
 
     @Override
+    public BigDecimal evaluate(String expr) throws IOException, InterruptedException {
+        HttpResponse response = post(expr);
+        return new BigDecimal(response.body().toString());
+    }
+
     public HttpResponse get(String expr) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "?expr=" + expr))
@@ -23,7 +31,6 @@ public class ClientImpl implements Client {
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    @Override
     public HttpResponse post(String ex) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
