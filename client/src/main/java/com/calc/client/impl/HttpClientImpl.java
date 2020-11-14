@@ -1,5 +1,4 @@
 package com.calc.client.impl;
-import com.calc.client.service.Client;
 
 import java.io.IOException;
 import java.math.BigDecimal;

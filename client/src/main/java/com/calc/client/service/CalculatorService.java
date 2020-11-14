@@ -1,5 +1,8 @@
 package com.calc.client.service;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+
 public interface CalculatorService {
-    Client createClient();
+    BigDecimal evaluate(String expr) throws IOException, InterruptedException;
 }

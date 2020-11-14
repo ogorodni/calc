@@ -1,6 +1,6 @@
 package com.calc.app;
 
-import com.calc.client.service.Client;
+import com.calc.client.service.CalculatorService;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ public class Main {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:context.xml");
         ctx.refresh();
-        Client client = ctx.getBean("client", Client.class);
+        CalculatorService calculatorService = ctx.getBean("calculatorService", CalculatorService.class);
         String expr = "((1+2) + 3*4 - 1)*5";
-        System.out.println(expr + " = " + client.evaluate(expr));
+        System.out.println(expr + " = " + calculatorService.evaluate(expr));
     }
 }

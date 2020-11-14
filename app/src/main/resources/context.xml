@@ -9,6 +9,4 @@
         <constructor-arg value="http://localhost:8080/calc"/>
     </bean>
 
-    <bean id="client" factory-bean="calculatorService" factory-method="createClient"/>
-
 </beans>

@@ -1,4 +1,4 @@
-package com.calc.domain;
+package com.calc.domain.impl;
 
 import java.math.BigDecimal;
 

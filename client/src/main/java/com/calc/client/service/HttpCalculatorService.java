@@ -1,17 +1,21 @@
 package com.calc.client.service;
 
+import com.calc.client.impl.Client;
 import com.calc.client.impl.HttpClientImpl;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 
 public class HttpCalculatorService implements CalculatorService {
 
-    private final String url;
+    private final Client client;
 
     public HttpCalculatorService(String url) {
-        this.url = url;
+        this.client = new HttpClientImpl(url);
     }
 
     @Override
-    public Client createClient() {
-        return new HttpClientImpl(url);
+    public BigDecimal evaluate(String expr) throws IOException, InterruptedException {
+        return client.evaluate(expr);
     }
 }
