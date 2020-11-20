@@ -3,20 +3,21 @@ package com.calc.domain.impl;
 import com.calc.domain.Expression;
 
 import java.math.BigDecimal;
+import java.util.function.BinaryOperator;
 
-public class ExpressionBinaryOperation implements Expression {
+public abstract class ExpressionBinaryOperation implements Expression {
     Expression left;
     Expression right;
-    Operation operation;
 
-    public ExpressionBinaryOperation(Expression left, Expression right, Operation op) {
+    public ExpressionBinaryOperation(Expression left, Expression right) {
         this.left = left;
         this.right = right;
-        this.operation = op;
     }
 
+    public abstract BinaryOperator<BigDecimal> getOperation();
+
     @Override
-    public BigDecimal evaluate() {
-        return operation.action(left.evaluate(), right.evaluate());
+    public BigDecimal evaluate(){
+        return getOperation().apply(left.evaluate(), right.evaluate());
     }
 }

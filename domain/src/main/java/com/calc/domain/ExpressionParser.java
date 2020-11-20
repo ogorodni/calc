@@ -1,8 +1,6 @@
 package com.calc.domain;
 
-import com.calc.domain.impl.ExpressionBinaryOperation;
-import com.calc.domain.impl.ExpressionNode;
-import com.calc.domain.impl.Operation;
+import com.calc.domain.impl.*;
 import com.florianingerl.util.regex.Matcher;
 import com.florianingerl.util.regex.Pattern;
 
@@ -30,22 +28,31 @@ public class ExpressionParser {
             System.out.println("left: " + sumMatcher.group("left") + ", operation: " + sumMatcher.group("operation").charAt(0) + ", right: " + sumMatcher.group("right"));
             Expression left = parse(sumMatcher.group("left"));
             Expression right = parse(sumMatcher.group("right"));
-            Operation operation = Operation.getOperation(sumMatcher.group("operation").charAt(0));
-            return new ExpressionBinaryOperation(left, right, operation);
+            Character operation = sumMatcher.group("operation").charAt(0);
+            if (operation == '+') {
+                return new ExpressionBinaryOperationAdd(left, right);
+            } else if (operation == '-') {
+                return new ExpressionBinaryOperationSubstruct(left, right);
+            }
         } else if (mulMatcher.find()) {
             System.out.println("left: " + mulMatcher.group("left") + ", operation: " + mulMatcher.group("operation").charAt(0) + ", right: " + mulMatcher.group("right"));
             Expression left = parse(mulMatcher.group("left"));
             Expression right = parse(mulMatcher.group("right"));
-            Operation operation = Operation.getOperation(mulMatcher.group("operation").charAt(0));
-            return new ExpressionBinaryOperation(left, right, operation);
+            Character operation = mulMatcher.group("operation").charAt(0);
+            if (operation == '*') {
+                return new ExpressionBinaryOperationMultiply(left, right);
+            } else if (operation == '/') {
+                return new ExpressionBinaryOperationDivide(left, right);
+            }
         } else if (bracketMatcher.find()) {
             System.out.println("brackets: (" + str.substring(1, str.length() - 1) + ")");
             return parse(str.substring(1, str.length() - 1));
-        } else if (operandMatcher.find()){
+        } else if (operandMatcher.find()) {
             System.out.println("value: " + str);
-            return new ExpressionNode(new BigDecimal(str));
+            return new ExpressionConst(new BigDecimal(str));
         } else {
             throw new IllegalArgumentException("you try to parse incorrect expression: " + str);
         }
+        return null;
     }
 }

@@ -5,7 +5,9 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
 
-    <bean id="calculatorService" class="com.calc.client.service.HttpCalculatorService">
+    <bean id="serviceFactory" class="com.calc.client.service.ServiceFactory"/>
+
+    <bean id="calculatorService" factory-bean="serviceFactory" factory-method="getService">
         <constructor-arg value="http://localhost:8080/calc"/>
     </bean>
 

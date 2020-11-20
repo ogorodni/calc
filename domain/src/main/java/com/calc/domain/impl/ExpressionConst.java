@@ -4,10 +4,10 @@ import com.calc.domain.Expression;
 
 import java.math.BigDecimal;
 
-public class ExpressionNode implements Expression {
+public class ExpressionConst implements Expression {
     BigDecimal value;
 
-    public ExpressionNode(BigDecimal value) {
+    public ExpressionConst(BigDecimal value) {
         this.value = value;
     }
 

@@ -9,7 +9,7 @@ public class Main {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:context.xml");
         ctx.refresh();
-        CalculatorService calculatorService = ctx.getBean("calculatorService", CalculatorService.class);
+        CalculatorService calculatorService = ctx.getBean(CalculatorService.class);
         String expr = "((1+2) + 3*4 - 1)*5";
         System.out.println(expr + " = " + calculatorService.evaluate(expr));
     }
