@@ -1,6 +1,6 @@
 package com.calc.server;
 
-import com.calc.domain.ExpressionParser;
+import com.calc.antlr.service.AntlrCalculator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,16 +11,16 @@ public class CalcController {
 
     @GetMapping("/calc")
     public @ResponseBody
-    BigDecimal calculate(@RequestParam String expr)
-    {
-        return ExpressionParser.parse(expr).evaluate();
+    BigDecimal calculate(@RequestParam String expr) {
+        AntlrCalculator antlrCalculator = new AntlrCalculator();
+        return antlrCalculator.evaluate(expr);
     }
 
     @PostMapping("/calc")
     public @ResponseBody
-    BigDecimal jsonCalculate(@RequestBody String expr)
-    {
-        return ExpressionParser.parse(expr).evaluate();
+    BigDecimal jsonCalculate(@RequestBody String expr) {
+        AntlrCalculator antlrCalculator = new AntlrCalculator();
+        return antlrCalculator.evaluate(expr);
     }
 
 }
