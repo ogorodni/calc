@@ -5,4 +5,5 @@ open module com.calc.server {
     requires spring.boot.autoconfigure;
     requires java.sql;
     requires com.calc.antlr;
+    requires com.calc.calculator;
 }

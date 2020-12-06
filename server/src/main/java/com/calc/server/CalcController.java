@@ -9,17 +9,17 @@ import java.math.BigDecimal;
 @Controller
 public class CalcController {
 
+    AntlrCalculator antlrCalculator = new AntlrCalculator();
+
     @GetMapping("/calc")
     public @ResponseBody
     BigDecimal calculate(@RequestParam String expr) {
-        AntlrCalculator antlrCalculator = new AntlrCalculator();
         return antlrCalculator.evaluate(expr);
     }
 
     @PostMapping("/calc")
     public @ResponseBody
     BigDecimal jsonCalculate(@RequestBody String expr) {
-        AntlrCalculator antlrCalculator = new AntlrCalculator();
         return antlrCalculator.evaluate(expr);
     }
 

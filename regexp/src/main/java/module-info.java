@@ -1,5 +1,5 @@
-module com.calc.domain {
+module com.calc.regexp {
     requires regex;
-    requires calculator.api;
+    requires com.calc.calculator;
     exports com.calc.regexp.service;
 }

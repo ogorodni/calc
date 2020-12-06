@@ -1,3 +1,3 @@
-module calculator.api {
+open module com.calc.calculator {
     exports com.calc.calculator;
 }
