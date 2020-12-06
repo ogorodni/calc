@@ -1,15 +1,16 @@
-package com.calc.regexp;
+package com.calc.antlr.impl;
 
-import com.calc.regexp.service.RegexpCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-class ExpressionParserTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    RegexpCalculator calculator = new RegexpCalculator();
+class AntlrCalculatorImplTest {
+
+    AntlrCalculatorImpl calculator = new AntlrCalculatorImpl();
 
     @Test
     @DisplayName("single value")
@@ -39,11 +40,6 @@ class ExpressionParserTest {
     @DisplayName("negative values")
     void negativeValues() {
         Assertions.assertEquals(new BigDecimal(-4), calculator.evaluate("(1+1)*(-2)"));
-    }
-
-    @Test
-    @DisplayName("invalid expression")
-    void invalidExpression() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.evaluate("(1+1)*(-2)("), "you try to parse incorrect expression: (1+1)*(-2)(");
+        Assertions.assertEquals(new BigDecimal(-4), calculator.evaluate("-(1+1)*(2)"));
     }
 }

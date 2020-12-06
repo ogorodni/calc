@@ -31,4 +31,9 @@ public class EvalVisitor extends ExprBaseVisitor<BigDecimal> {
     public BigDecimal visitParens(ExprParser.ParensContext ctx) {
         return visit(ctx.expr()); // return child expr's value
     }
+    /** op = -expr */
+    @Override
+    public BigDecimal visitNeg(ExprParser.NegContext ctx){
+        return visit(ctx.expr()).multiply(new BigDecimal(-1));
+    }
 }

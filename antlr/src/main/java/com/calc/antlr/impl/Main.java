@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //        TestRig tr = new TestRig( new String[]{"com.calc.antlr.Expr", "expr", "-gui"});
 //        tr.process();
-        CharStream input = CharStreams.fromString("1 + 1");
+        CharStream input = CharStreams.fromString("(1+1)*(-2)");
         ExprLexer lexer = new ExprLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ExprParser parser = new ExprParser(tokens);
