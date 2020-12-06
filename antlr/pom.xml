@@ -17,24 +17,6 @@
             <version>4.8-1</version>
         </dependency>
         <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4</artifactId>
-            <version>4.8-1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4</artifactId>
-            <version>4.8-1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4</artifactId>
-            <version>4.8-1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.calc</groupId>
             <artifactId>calculator-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
