@@ -1,39 +1,44 @@
 package com.calc.antlr.impl;
 
+import com.calc.regexp.impl.*;
+
 import java.math.BigDecimal;
 
-public class EvalVisitor extends ExprBaseVisitor<BigDecimal> {
+public class EvalVisitor extends ExprBaseVisitor<Expression> {
 
     /** INT */
     @Override
-    public BigDecimal visitInt(ExprParser.IntContext ctx) {
-        return new BigDecimal(ctx.INT().getText());
+    public Expression visitInt(ExprParser.IntContext ctx) {return new ExpressionConst(new BigDecimal(ctx.INT().getText()));
     }
 
-    /** expr op=('*'|'/') expr */
+    /** expr '*' expr */
     @Override
-    public BigDecimal visitMulDiv(ExprParser.MulDivContext ctx) {
-        BigDecimal left = visit(ctx.expr(0)); // get value of left subexpression
-        BigDecimal right = visit(ctx.expr(1)); // get value of right subexpression
-        if ( ctx.op.getType() == ExprParser.MUL ) return left.multiply(right);
-        return left.divide(right); // must be DIV
+    public Expression visitMul(ExprParser.MulContext ctx) {
+        return new ExpressionBinaryOperationMultiply(visit(ctx.expr(0)), visit(ctx.expr(1)));
     }
-    /** expr op=('+'|'-') expr */
+    /** expr '/' expr */
     @Override
-    public BigDecimal visitAddSub(ExprParser.AddSubContext ctx) {
-        BigDecimal left = visit(ctx.expr(0)); // get value of left subexpression
-        BigDecimal right = visit(ctx.expr(1)); // get value of right subexpression
-        if ( ctx.op.getType() == ExprParser.ADD ) return left.add(right);
-        return left.subtract(right); // must be SUB
+    public Expression visitDiv(ExprParser.DivContext ctx) {
+        return new ExpressionBinaryOperationDivide(visit(ctx.expr(0)), visit(ctx.expr(1)));
+    }
+    /** expr '+' expr */
+    @Override
+    public Expression visitAdd(ExprParser.AddContext ctx) {
+        return new ExpressionBinaryOperationAdd(visit(ctx.expr(0)), visit(ctx.expr(1)));
+    }
+    /** expr '-' expr */
+    @Override
+    public Expression visitSub(ExprParser.SubContext ctx) {
+        return new ExpressionBinaryOperationSubstruct(visit(ctx.expr(0)), visit(ctx.expr(1)));
     }
     /** '(' expr ')' */
     @Override
-    public BigDecimal visitParens(ExprParser.ParensContext ctx) {
+    public Expression visitParens(ExprParser.ParensContext ctx) {
         return visit(ctx.expr()); // return child expr's value
     }
     /** op = -expr */
     @Override
-    public BigDecimal visitNeg(ExprParser.NegContext ctx){
-        return visit(ctx.expr()).multiply(new BigDecimal(-1));
+    public Expression visitNeg(ExprParser.NegContext ctx){
+        return new ExpressionBinaryOperationMultiply(visit(ctx.expr()), new ExpressionConst(new BigDecimal(-1)));
     }
 }

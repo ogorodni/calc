@@ -15,6 +15,6 @@ public class AntlrCalculatorImpl {
         ExprParser parser = new ExprParser(tokens);
         ParseTree tree = parser.expr();
         EvalVisitor eval = new EvalVisitor();
-        return eval.visit(tree);
+        return eval.visit(tree).evaluate();
     }
 }

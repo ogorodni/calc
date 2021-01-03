@@ -1,16 +1,13 @@
 grammar Expr;
 
 expr : '-' expr # Neg
- | expr op=('*'|'/') expr # MulDiv
- | expr op=('+'|'-') expr # AddSub
+ | expr '*' expr # Mul
+ | expr '/' expr # Div
+ | expr '+' expr # Add
+ | expr '-' expr # Sub
  | INT # int
  | '(' expr ')' # parens
  ;
-
-MUL : '*' ;
-DIV : '/' ;
-ADD : '+' ;
-SUB : '-' ;
 
 INT : [0-9]+ ; // match integers
 
