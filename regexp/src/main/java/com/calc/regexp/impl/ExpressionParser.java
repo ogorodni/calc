@@ -1,5 +1,6 @@
 package com.calc.regexp.impl;
 
+import com.calc.domain.*;
 import com.florianingerl.util.regex.Matcher;
 import com.florianingerl.util.regex.Pattern;
 

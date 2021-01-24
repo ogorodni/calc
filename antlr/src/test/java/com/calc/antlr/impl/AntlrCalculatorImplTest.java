@@ -1,5 +1,7 @@
 package com.calc.antlr.impl;
 
+import com.calc.antlr.service.AntlrCalculator;
+import com.calc.calculator.Calculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +10,7 @@ import java.math.BigDecimal;
 
 class AntlrCalculatorImplTest {
 
-    AntlrCalculatorImpl calculator = new AntlrCalculatorImpl();
+    Calculator calculator = new AntlrCalculator();
 
     @Test
     @DisplayName("single value")

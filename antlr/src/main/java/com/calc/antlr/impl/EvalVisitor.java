@@ -1,6 +1,6 @@
 package com.calc.antlr.impl;
 
-import com.calc.regexp.impl.*;
+import com.calc.domain.*;
 
 import java.math.BigDecimal;
 

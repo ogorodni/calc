@@ -12,6 +12,7 @@
     <modules>
         <module>app</module>
         <module>client</module>
+        <module>domain</module>
         <module>antlr</module>
         <module>regexp</module>
         <module>server</module>

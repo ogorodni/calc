@@ -1,4 +1,4 @@
-package com.calc.regexp.impl;
+package com.calc.domain;
 
 import java.math.BigDecimal;
 import java.util.function.BinaryOperator;

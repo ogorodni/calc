@@ -1,5 +1,6 @@
 package com.calc.regexp;
 
+import com.calc.calculator.Calculator;
 import com.calc.regexp.service.RegexpCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 
 class ExpressionParserTest {
 
-    RegexpCalculator calculator = new RegexpCalculator();
+    Calculator calculator = new RegexpCalculator();
 
     @Test
     @DisplayName("single value")
